@@ -27,23 +27,12 @@ namespace ExampleSqlApp
 
             CreateColumns();
             LoadRecipes();
-
-            // НАСТРОЙКА РАЗМЕРОВ КОЛОНОК ПОСЛЕ ЗАГРУЗКИ
-            dataGridViewRecipes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
-            dataGridViewRecipes.AllowUserToResizeColumns = false;
-
-            // Установка фиксированной ширины для кнопок
-            if (dataGridViewRecipes.Columns.Contains("Edit"))
-                dataGridViewRecipes.Columns["Edit"].Width = 100;
-            if (dataGridViewRecipes.Columns.Contains("Delete"))
-                dataGridViewRecipes.Columns["Delete"].Width = 100;
-
         }
         private void CreateColumns()
         {
             dataGridViewRecipes.Columns.Clear();
 
-            // 1. №
+            // колонка с номером
             DataGridViewTextBoxColumn idCol = new DataGridViewTextBoxColumn();
             idCol.Name = "Id";
             idCol.HeaderText = "№";
@@ -51,7 +40,7 @@ namespace ExampleSqlApp
             idCol.Width = 50;
             dataGridViewRecipes.Columns.Add(idCol);
 
-            // 2. Название
+            // название
             DataGridViewTextBoxColumn titleCol = new DataGridViewTextBoxColumn();
             titleCol.Name = "Title";
             titleCol.HeaderText = "Название";
@@ -59,7 +48,7 @@ namespace ExampleSqlApp
             titleCol.Width = 100;
             dataGridViewRecipes.Columns.Add(titleCol);
 
-            // 3. Описание
+            //описание
             DataGridViewTextBoxColumn descCol = new DataGridViewTextBoxColumn();
             descCol.Name = "Description";
             descCol.HeaderText = "Описание";
@@ -68,7 +57,7 @@ namespace ExampleSqlApp
             descCol.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridViewRecipes.Columns.Add(descCol);
 
-            // 4. Ингредиенты
+            // ингредиенты
             DataGridViewTextBoxColumn ingCol = new DataGridViewTextBoxColumn();
             ingCol.Name = "Ingredients";
             ingCol.HeaderText = "Ингредиенты";
@@ -76,7 +65,7 @@ namespace ExampleSqlApp
             ingCol.Width = 100;
             dataGridViewRecipes.Columns.Add(ingCol);
 
-            // 5. Тип блюда
+            // тип блюда
             DataGridViewTextBoxColumn typeCol = new DataGridViewTextBoxColumn();
             typeCol.Name = "TypeDish";
             typeCol.HeaderText = "Тип блюда";
@@ -84,7 +73,7 @@ namespace ExampleSqlApp
             typeCol.Width = 80;
             dataGridViewRecipes.Columns.Add(typeCol);
 
-            // 6. Сложность
+            // сложность
             DataGridViewTextBoxColumn diffCol = new DataGridViewTextBoxColumn();
             diffCol.Name = "Difficulty";
             diffCol.HeaderText = "Сложность";
@@ -92,7 +81,7 @@ namespace ExampleSqlApp
             diffCol.Width = 80;
             dataGridViewRecipes.Columns.Add(diffCol);
 
-            // 7. Прием пищи
+            // приём пищи
             DataGridViewTextBoxColumn mealCol = new DataGridViewTextBoxColumn();
             mealCol.Name = "MealType";
             mealCol.HeaderText = "Прием пищи";
@@ -100,7 +89,7 @@ namespace ExampleSqlApp
             mealCol.Width = 80;
             dataGridViewRecipes.Columns.Add(mealCol);
 
-            // 8. Изменить (кнопка) - фиксированная
+            // кнопка изменить
             DataGridViewButtonColumn editCol = new DataGridViewButtonColumn();
             editCol.Name = "Edit";
             editCol.HeaderText = "";
@@ -111,7 +100,7 @@ namespace ExampleSqlApp
             editCol.Resizable = DataGridViewTriState.False;
             dataGridViewRecipes.Columns.Add(editCol);
 
-            // 9. Удалить (кнопка) - фиксированная
+            // кнопка удалить
             DataGridViewButtonColumn deleteCol = new DataGridViewButtonColumn();
             deleteCol.Name = "Delete";
             deleteCol.HeaderText = "";
@@ -165,8 +154,6 @@ namespace ExampleSqlApp
                 newLoginForm.Show();
             }
         }
-
-
         private void DeleteRecipe(int recipeId)
         {
             try
@@ -188,13 +175,10 @@ namespace ExampleSqlApp
             {
                 int recipeId = Convert.ToInt32(dataGridViewRecipes.Rows[e.RowIndex].Cells["Id"].Value);
                 string recipeTitle = dataGridViewRecipes.Rows[e.RowIndex].Cells["Title"].Value.ToString();
-
-                // Если нажали на кнопку "Изменить"
                 if (e.ColumnIndex == dataGridViewRecipes.Columns["Edit"].Index)
                 {
                     MessageBox.Show($"Редактировать рецепт: {recipeTitle}");
                 }
-                // Если нажали на кнопку "Удалить"
                 else if (e.ColumnIndex == dataGridViewRecipes.Columns["Delete"].Index)
                 {
                     DialogResult result = MessageBox.Show($"Удалить рецепт '{recipeTitle}'?",

@@ -34,6 +34,7 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridViewRecipes = new System.Windows.Forms.DataGridView();
+            this.comboBoxChoice = new System.Windows.Forms.ComboBox();
             this.panelRecipes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRecipes)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +45,7 @@
             this.buttonBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonBack.FlatAppearance.BorderSize = 0;
             this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBack.Location = new System.Drawing.Point(1056, 35);
+            this.buttonBack.Location = new System.Drawing.Point(1103, 44);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(138, 37);
             this.buttonBack.TabIndex = 0;
@@ -59,7 +60,7 @@
             this.panelRecipes.Controls.Add(this.buttonBack);
             this.panelRecipes.Location = new System.Drawing.Point(-2, 0);
             this.panelRecipes.Name = "panelRecipes";
-            this.panelRecipes.Size = new System.Drawing.Size(1265, 203);
+            this.panelRecipes.Size = new System.Drawing.Size(1279, 203);
             this.panelRecipes.TabIndex = 1;
             // 
             // nameRecipes
@@ -75,10 +76,11 @@
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(929, 234);
+            this.textBoxSearch.Location = new System.Drawing.Point(929, 232);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(263, 26);
             this.textBoxSearch.TabIndex = 2;
+            this.textBoxSearch.Text = "Поиск";
             // 
             // buttonAdd
             // 
@@ -109,12 +111,23 @@
             this.dataGridViewRecipes.TabIndex = 4;
             this.dataGridViewRecipes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRecipes_CellClick);
             // 
+            // comboBoxChoice
+            // 
+            this.comboBoxChoice.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBoxChoice.FormattingEnabled = true;
+            this.comboBoxChoice.Location = new System.Drawing.Point(242, 232);
+            this.comboBoxChoice.Name = "comboBoxChoice";
+            this.comboBoxChoice.Size = new System.Drawing.Size(210, 28);
+            this.comboBoxChoice.TabIndex = 5;
+            this.comboBoxChoice.Text = "Фильтр по категориям";
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1275, 661);
+            this.Controls.Add(this.comboBoxChoice);
             this.Controls.Add(this.dataGridViewRecipes);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.textBoxSearch);
@@ -139,5 +152,6 @@
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.DataGridView dataGridViewRecipes;
+        private System.Windows.Forms.ComboBox comboBoxChoice;
     }
 }
