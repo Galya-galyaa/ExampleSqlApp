@@ -177,13 +177,14 @@ namespace ExampleSqlApp
                 string recipeTitle = dataGridViewRecipes.Rows[e.RowIndex].Cells["Title"].Value.ToString();
                 if (e.ColumnIndex == dataGridViewRecipes.Columns["Edit"].Index)
                 {
-                    MessageBox.Show($"Редактировать рецепт: {recipeTitle}");
+                    EditForm editForm = new EditForm(recipeId);
+                    editForm.ShowDialog();
+                    LoadRecipes(); 
                 }
                 else if (e.ColumnIndex == dataGridViewRecipes.Columns["Delete"].Index)
                 {
                     DialogResult result = MessageBox.Show($"Удалить рецепт '{recipeTitle}'?",
                         "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
                     if (result == DialogResult.Yes)
                     {
                         DeleteRecipe(recipeId);

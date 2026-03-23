@@ -29,27 +29,33 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cmbIngredients = new System.Windows.Forms.ComboBox();
+            this.btnAddIngredient = new System.Windows.Forms.Button();
+            this.btnRemoveIngredient = new System.Windows.Forms.Button();
+            this.txtIngredientsList = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton7 = new System.Windows.Forms.RadioButton();
-            this.radioButton8 = new System.Windows.Forms.RadioButton();
-            this.radioButton9 = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtDescription = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAddNewIngredient = new System.Windows.Forms.Button();
+            this.gbMealType = new System.Windows.Forms.GroupBox();
+            this.gbDishType = new System.Windows.Forms.GroupBox();
+            this.gbDifficulty = new System.Windows.Forms.GroupBox();
+            this.rbMealDinner = new System.Windows.Forms.RadioButton();
+            this.rbMealLunch = new System.Windows.Forms.RadioButton();
+            this.rbMealBreakfast = new System.Windows.Forms.RadioButton();
+            this.rbTypeThird = new System.Windows.Forms.RadioButton();
+            this.rbTypeSecond = new System.Windows.Forms.RadioButton();
+            this.rbTypeFirst = new System.Windows.Forms.RadioButton();
+            this.rbDifficultyHard = new System.Windows.Forms.RadioButton();
+            this.rbDifficultyMedium = new System.Windows.Forms.RadioButton();
+            this.rbDifficultyEasy = new System.Windows.Forms.RadioButton();
+            this.gbMealType.SuspendLayout();
+            this.gbDishType.SuspendLayout();
+            this.gbDifficulty.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -61,12 +67,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Название: ";
             // 
-            // textBox1
+            // txtTitle
             // 
-            this.textBox1.Location = new System.Drawing.Point(241, 90);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(194, 26);
-            this.textBox1.TabIndex = 1;
+            this.txtTitle.Location = new System.Drawing.Point(241, 90);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(194, 26);
+            this.txtTitle.TabIndex = 1;
             // 
             // label2
             // 
@@ -77,40 +83,44 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Ингредиенты: ";
             // 
-            // comboBox1
+            // cmbIngredients
             // 
-            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(241, 162);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(194, 28);
-            this.comboBox1.TabIndex = 3;
+            this.cmbIngredients.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbIngredients.FormattingEnabled = true;
+            this.cmbIngredients.Location = new System.Drawing.Point(241, 162);
+            this.cmbIngredients.Name = "cmbIngredients";
+            this.cmbIngredients.Size = new System.Drawing.Size(194, 28);
+            this.cmbIngredients.TabIndex = 3;
             // 
-            // button1
+            // btnAddIngredient
             // 
-            this.button1.Location = new System.Drawing.Point(512, 162);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 34);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddIngredient.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddIngredient.Location = new System.Drawing.Point(512, 162);
+            this.btnAddIngredient.Name = "btnAddIngredient";
+            this.btnAddIngredient.Size = new System.Drawing.Size(120, 34);
+            this.btnAddIngredient.TabIndex = 4;
+            this.btnAddIngredient.Text = "Добавить";
+            this.btnAddIngredient.UseVisualStyleBackColor = true;
+            this.btnAddIngredient.Click += new System.EventHandler(this.btnAddIngredient_Click);
             // 
-            // button2
+            // btnRemoveIngredient
             // 
-            this.button2.Location = new System.Drawing.Point(512, 229);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(119, 33);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Удалить";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnRemoveIngredient.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRemoveIngredient.Location = new System.Drawing.Point(512, 229);
+            this.btnRemoveIngredient.Name = "btnRemoveIngredient";
+            this.btnRemoveIngredient.Size = new System.Drawing.Size(119, 33);
+            this.btnRemoveIngredient.TabIndex = 5;
+            this.btnRemoveIngredient.Text = "Удалить";
+            this.btnRemoveIngredient.UseVisualStyleBackColor = true;
+            this.btnRemoveIngredient.Click += new System.EventHandler(this.btnRemoveIngredient_Click);
             // 
-            // textBox2
+            // txtIngredientsList
             // 
-            this.textBox2.Location = new System.Drawing.Point(677, 162);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(320, 143);
-            this.textBox2.TabIndex = 6;
+            this.txtIngredientsList.Location = new System.Drawing.Point(677, 162);
+            this.txtIngredientsList.Multiline = true;
+            this.txtIngredientsList.Name = "txtIngredientsList";
+            this.txtIngredientsList.Size = new System.Drawing.Size(320, 143);
+            this.txtIngredientsList.TabIndex = 6;
             // 
             // label3
             // 
@@ -121,139 +131,13 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Описание:";
             // 
-            // textBox3
+            // txtDescription
             // 
-            this.textBox3.Location = new System.Drawing.Point(206, 330);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(358, 167);
-            this.textBox3.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(87, 515);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(144, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Тип приёма пищи:";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(109, 552);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(98, 24);
-            this.radioButton1.TabIndex = 10;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Завтрак";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(109, 582);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(75, 24);
-            this.radioButton2.TabIndex = 11;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Обед";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(109, 612);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(73, 24);
-            this.radioButton3.TabIndex = 12;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Ужин";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(272, 515);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 20);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Тип блюда:";
-            // 
-            // radioButton4
-            // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(277, 612);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(88, 24);
-            this.radioButton4.TabIndex = 16;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Третье";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(277, 582);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(90, 24);
-            this.radioButton5.TabIndex = 15;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Второе";
-            this.radioButton5.UseVisualStyleBackColor = true;
-            // 
-            // radioButton6
-            // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(277, 552);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(91, 24);
-            this.radioButton6.TabIndex = 14;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Первое";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // radioButton7
-            // 
-            this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(461, 612);
-            this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(93, 24);
-            this.radioButton7.TabIndex = 19;
-            this.radioButton7.TabStop = true;
-            this.radioButton7.Text = "Сложно";
-            this.radioButton7.UseVisualStyleBackColor = true;
-            // 
-            // radioButton8
-            // 
-            this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(461, 582);
-            this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(92, 24);
-            this.radioButton8.TabIndex = 18;
-            this.radioButton8.TabStop = true;
-            this.radioButton8.Text = "Средне";
-            this.radioButton8.UseVisualStyleBackColor = true;
-            // 
-            // radioButton9
-            // 
-            this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(461, 552);
-            this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(79, 24);
-            this.radioButton9.TabIndex = 17;
-            this.radioButton9.TabStop = true;
-            this.radioButton9.Text = "Легко";
-            this.radioButton9.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(425, 515);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 20);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "Степень сложности:";
+            this.txtDescription.Location = new System.Drawing.Point(206, 330);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(358, 167);
+            this.txtDescription.TabIndex = 8;
             // 
             // label7
             // 
@@ -265,35 +149,212 @@
             this.label7.TabIndex = 21;
             this.label7.Text = "Редактирование блюда:";
             // 
+            // btnSave
+            // 
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.Location = new System.Drawing.Point(717, 582);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(109, 37);
+            this.btnSave.TabIndex = 22;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Location = new System.Drawing.Point(888, 582);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(109, 37);
+            this.btnCancel.TabIndex = 23;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnAddNewIngredient
+            // 
+            this.btnAddNewIngredient.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddNewIngredient.Location = new System.Drawing.Point(241, 229);
+            this.btnAddNewIngredient.Name = "btnAddNewIngredient";
+            this.btnAddNewIngredient.Size = new System.Drawing.Size(194, 53);
+            this.btnAddNewIngredient.TabIndex = 24;
+            this.btnAddNewIngredient.Text = "Добавить новый ингредиент";
+            this.btnAddNewIngredient.UseVisualStyleBackColor = true;
+            this.btnAddNewIngredient.Click += new System.EventHandler(this.btnAddNewIngredient_Click);
+            // 
+            // gbMealType
+            // 
+            this.gbMealType.Controls.Add(this.rbMealDinner);
+            this.gbMealType.Controls.Add(this.rbMealLunch);
+            this.gbMealType.Controls.Add(this.rbMealBreakfast);
+            this.gbMealType.Location = new System.Drawing.Point(74, 515);
+            this.gbMealType.Name = "gbMealType";
+            this.gbMealType.Size = new System.Drawing.Size(176, 112);
+            this.gbMealType.TabIndex = 25;
+            this.gbMealType.TabStop = false;
+            this.gbMealType.Text = "Тип приема пищи:";
+            // 
+            // gbDishType
+            // 
+            this.gbDishType.Controls.Add(this.rbTypeThird);
+            this.gbDishType.Controls.Add(this.rbTypeSecond);
+            this.gbDishType.Controls.Add(this.rbTypeFirst);
+            this.gbDishType.Location = new System.Drawing.Point(256, 513);
+            this.gbDishType.Name = "gbDishType";
+            this.gbDishType.Size = new System.Drawing.Size(149, 123);
+            this.gbDishType.TabIndex = 26;
+            this.gbDishType.TabStop = false;
+            this.gbDishType.Text = "Тип блюда:";
+            // 
+            // gbDifficulty
+            // 
+            this.gbDifficulty.Controls.Add(this.rbDifficultyHard);
+            this.gbDifficulty.Controls.Add(this.rbDifficultyMedium);
+            this.gbDifficulty.Controls.Add(this.rbDifficultyEasy);
+            this.gbDifficulty.Location = new System.Drawing.Point(446, 515);
+            this.gbDifficulty.Name = "gbDifficulty";
+            this.gbDifficulty.Size = new System.Drawing.Size(186, 121);
+            this.gbDifficulty.TabIndex = 27;
+            this.gbDifficulty.TabStop = false;
+            this.gbDifficulty.Text = "Степень сложности:";
+            // 
+            // rbMealDinner
+            // 
+            this.rbMealDinner.AutoSize = true;
+            this.rbMealDinner.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbMealDinner.Location = new System.Drawing.Point(36, 85);
+            this.rbMealDinner.Name = "rbMealDinner";
+            this.rbMealDinner.Size = new System.Drawing.Size(73, 24);
+            this.rbMealDinner.TabIndex = 15;
+            this.rbMealDinner.TabStop = true;
+            this.rbMealDinner.Text = "Ужин";
+            this.rbMealDinner.UseVisualStyleBackColor = true;
+            // 
+            // rbMealLunch
+            // 
+            this.rbMealLunch.AutoSize = true;
+            this.rbMealLunch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbMealLunch.Location = new System.Drawing.Point(36, 55);
+            this.rbMealLunch.Name = "rbMealLunch";
+            this.rbMealLunch.Size = new System.Drawing.Size(75, 24);
+            this.rbMealLunch.TabIndex = 14;
+            this.rbMealLunch.TabStop = true;
+            this.rbMealLunch.Text = "Обед";
+            this.rbMealLunch.UseVisualStyleBackColor = true;
+            // 
+            // rbMealBreakfast
+            // 
+            this.rbMealBreakfast.AutoSize = true;
+            this.rbMealBreakfast.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbMealBreakfast.Location = new System.Drawing.Point(36, 25);
+            this.rbMealBreakfast.Name = "rbMealBreakfast";
+            this.rbMealBreakfast.Size = new System.Drawing.Size(98, 24);
+            this.rbMealBreakfast.TabIndex = 13;
+            this.rbMealBreakfast.TabStop = true;
+            this.rbMealBreakfast.Text = "Завтрак";
+            this.rbMealBreakfast.UseVisualStyleBackColor = true;
+            // 
+            // rbTypeThird
+            // 
+            this.rbTypeThird.AutoSize = true;
+            this.rbTypeThird.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbTypeThird.Location = new System.Drawing.Point(23, 87);
+            this.rbTypeThird.Name = "rbTypeThird";
+            this.rbTypeThird.Size = new System.Drawing.Size(88, 24);
+            this.rbTypeThird.TabIndex = 19;
+            this.rbTypeThird.TabStop = true;
+            this.rbTypeThird.Text = "Третье";
+            this.rbTypeThird.UseVisualStyleBackColor = true;
+            // 
+            // rbTypeSecond
+            // 
+            this.rbTypeSecond.AutoSize = true;
+            this.rbTypeSecond.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbTypeSecond.Location = new System.Drawing.Point(23, 57);
+            this.rbTypeSecond.Name = "rbTypeSecond";
+            this.rbTypeSecond.Size = new System.Drawing.Size(90, 24);
+            this.rbTypeSecond.TabIndex = 18;
+            this.rbTypeSecond.TabStop = true;
+            this.rbTypeSecond.Text = "Второе";
+            this.rbTypeSecond.UseVisualStyleBackColor = true;
+            // 
+            // rbTypeFirst
+            // 
+            this.rbTypeFirst.AutoSize = true;
+            this.rbTypeFirst.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbTypeFirst.Location = new System.Drawing.Point(23, 27);
+            this.rbTypeFirst.Name = "rbTypeFirst";
+            this.rbTypeFirst.Size = new System.Drawing.Size(91, 24);
+            this.rbTypeFirst.TabIndex = 17;
+            this.rbTypeFirst.TabStop = true;
+            this.rbTypeFirst.Text = "Первое";
+            this.rbTypeFirst.UseVisualStyleBackColor = true;
+            // 
+            // rbDifficultyHard
+            // 
+            this.rbDifficultyHard.AutoSize = true;
+            this.rbDifficultyHard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbDifficultyHard.Location = new System.Drawing.Point(49, 85);
+            this.rbDifficultyHard.Name = "rbDifficultyHard";
+            this.rbDifficultyHard.Size = new System.Drawing.Size(93, 24);
+            this.rbDifficultyHard.TabIndex = 22;
+            this.rbDifficultyHard.TabStop = true;
+            this.rbDifficultyHard.Text = "Сложно";
+            this.rbDifficultyHard.UseVisualStyleBackColor = true;
+            // 
+            // rbDifficultyMedium
+            // 
+            this.rbDifficultyMedium.AutoSize = true;
+            this.rbDifficultyMedium.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbDifficultyMedium.Location = new System.Drawing.Point(49, 55);
+            this.rbDifficultyMedium.Name = "rbDifficultyMedium";
+            this.rbDifficultyMedium.Size = new System.Drawing.Size(92, 24);
+            this.rbDifficultyMedium.TabIndex = 21;
+            this.rbDifficultyMedium.TabStop = true;
+            this.rbDifficultyMedium.Text = "Средне";
+            this.rbDifficultyMedium.UseVisualStyleBackColor = true;
+            // 
+            // rbDifficultyEasy
+            // 
+            this.rbDifficultyEasy.AutoSize = true;
+            this.rbDifficultyEasy.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rbDifficultyEasy.Location = new System.Drawing.Point(49, 25);
+            this.rbDifficultyEasy.Name = "rbDifficultyEasy";
+            this.rbDifficultyEasy.Size = new System.Drawing.Size(79, 24);
+            this.rbDifficultyEasy.TabIndex = 20;
+            this.rbDifficultyEasy.TabStop = true;
+            this.rbDifficultyEasy.Text = "Легко";
+            this.rbDifficultyEasy.UseVisualStyleBackColor = true;
+            // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1081, 662);
+            this.Controls.Add(this.gbDifficulty);
+            this.Controls.Add(this.gbDishType);
+            this.Controls.Add(this.gbMealType);
+            this.Controls.Add(this.btnAddNewIngredient);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.radioButton7);
-            this.Controls.Add(this.radioButton8);
-            this.Controls.Add(this.radioButton9);
-            this.Controls.Add(this.radioButton4);
-            this.Controls.Add(this.radioButton5);
-            this.Controls.Add(this.radioButton6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.txtIngredientsList);
+            this.Controls.Add(this.btnRemoveIngredient);
+            this.Controls.Add(this.btnAddIngredient);
+            this.Controls.Add(this.cmbIngredients);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.label1);
             this.Name = "EditForm";
             this.Text = "EditForm";
+            this.gbMealType.ResumeLayout(false);
+            this.gbMealType.PerformLayout();
+            this.gbDishType.ResumeLayout(false);
+            this.gbDishType.PerformLayout();
+            this.gbDifficulty.ResumeLayout(false);
+            this.gbDifficulty.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,26 +363,29 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox cmbIngredients;
+        private System.Windows.Forms.Button btnAddIngredient;
+        private System.Windows.Forms.Button btnRemoveIngredient;
+        private System.Windows.Forms.TextBox txtIngredientsList;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.RadioButton radioButton9;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnAddNewIngredient;
+        private System.Windows.Forms.GroupBox gbMealType;
+        private System.Windows.Forms.GroupBox gbDishType;
+        private System.Windows.Forms.GroupBox gbDifficulty;
+        private System.Windows.Forms.RadioButton rbMealDinner;
+        private System.Windows.Forms.RadioButton rbMealLunch;
+        private System.Windows.Forms.RadioButton rbMealBreakfast;
+        private System.Windows.Forms.RadioButton rbTypeThird;
+        private System.Windows.Forms.RadioButton rbTypeSecond;
+        private System.Windows.Forms.RadioButton rbTypeFirst;
+        private System.Windows.Forms.RadioButton rbDifficultyHard;
+        private System.Windows.Forms.RadioButton rbDifficultyMedium;
+        private System.Windows.Forms.RadioButton rbDifficultyEasy;
     }
 }
