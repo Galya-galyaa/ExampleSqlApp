@@ -193,6 +193,13 @@ namespace ExampleSqlApp
             }
 
         }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            EditForm addForm = new EditForm();
+            addForm.ShowDialog();
+            LoadRecipes();
+        }
     }
     
 }

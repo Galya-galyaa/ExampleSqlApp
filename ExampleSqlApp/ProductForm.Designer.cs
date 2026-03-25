@@ -96,6 +96,7 @@
             this.buttonAdd.TabIndex = 3;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // dataGridViewRecipes
             // 
