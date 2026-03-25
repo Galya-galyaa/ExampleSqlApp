@@ -17,48 +17,33 @@ namespace ExampleSqlApp
 
         private bool isEditMode;
 
+        private List<string> tempIngredients = new List<string>();
+
         private void btnAddIngredient_Click(object sender, EventArgs e)
         {
-            if (!isEditMode && recipeId == 0)
-            {
-                if (!SaveRecipeTemporarily())
-                    return;
-            }
-
             if (cmbIngredients.SelectedValue == null)
             {
                 MessageBox.Show("Выберите ингредиент из списка!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            int ingredientId = (int)cmbIngredients.SelectedValue;
             string ingredientName = cmbIngredients.Text;
 
-            DataTable check = db.ExecuteQuery($@"
-                SELECT * FROM recipe_ingredients 
-                WHERE recipe_id = {recipeId} AND ingredient_id = {ingredientId}");
-
-            if (check.Rows.Count > 0)
+            if (tempIngredients.Contains(ingredientName))
             {
-                MessageBox.Show($"Ингредиент '{ingredientName}' уже добавлен!",
-                    "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Ингредиент '{ingredientName}' уже добавлен!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string insertQuery = $@"
-                INSERT INTO recipe_ingredients (recipe_id, ingredient_id) 
-                VALUES ({recipeId}, {ingredientId})";
-            db.ExecuteNonQuery(insertQuery);
-
-            LoadIngredientsList();
+            tempIngredients.Add(ingredientName);
+            UpdateIngredientsList();
         }
 
         private void btnRemoveIngredient_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtIngredientsList.Text))
+            if (tempIngredients.Count == 0)
             {
-                MessageBox.Show("Нет ингредиентов для удаления!",
-                    "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Нет ингредиентов для удаления!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -72,35 +57,22 @@ namespace ExampleSqlApp
             lbIngredients.Location = new Point(10, 10);
             lbIngredients.Size = new Size(260, 150);
 
-            DataTable ingredients = db.ExecuteQuery($@"
-                SELECT i.id, i.name 
-                FROM recipe_ingredients ri
-                JOIN ingredients i ON ri.ingredient_id = i.id
-                WHERE ri.recipe_id = {recipeId}
-                ORDER BY i.name");
-
-            foreach (DataRow row in ingredients.Rows)
+            foreach (string ing in tempIngredients)
             {
-                lbIngredients.Items.Add(row["name"].ToString());
+                lbIngredients.Items.Add(ing);
             }
 
             Button btnConfirm = new Button();
             btnConfirm.Text = "Удалить";
             btnConfirm.Location = new Point(10, 170);
             btnConfirm.Size = new Size(100, 30);
-            btnConfirm.BackColor = System.Drawing.Color.LightCoral;
+            btnConfirm.BackColor = Color.LightCoral;
             btnConfirm.Click += (s, ev) =>
             {
                 if (lbIngredients.SelectedItem != null)
                 {
-                    string selectedName = lbIngredients.SelectedItem.ToString();
-                    DataTable ingId = db.ExecuteQuery($"SELECT id FROM ingredients WHERE name = '{selectedName.Replace("'", "''")}'");
-                    if (ingId.Rows.Count > 0)
-                    {
-                        int ingIdValue = Convert.ToInt32(ingId.Rows[0]["id"]);
-                        db.ExecuteNonQuery($"DELETE FROM recipe_ingredients WHERE recipe_id = {recipeId} AND ingredient_id = {ingIdValue}");
-                        LoadIngredientsList();
-                    }
+                    tempIngredients.Remove(lbIngredients.SelectedItem.ToString());
+                    UpdateIngredientsList();
                     selectForm.Close();
                 }
                 else
@@ -123,12 +95,6 @@ namespace ExampleSqlApp
 
         private void btnAddNewIngredient_Click(object sender, EventArgs e)
         {
-            if (!isEditMode && recipeId == 0)
-            {
-                if (!SaveRecipeTemporarily())
-                    return;
-            }
-
             Form inputForm = new Form();
             inputForm.Text = "Новый ингредиент";
             inputForm.Size = new Size(350, 180);
@@ -194,6 +160,7 @@ namespace ExampleSqlApp
             inputForm.Controls.Add(btnCancelAdd);
 
             inputForm.ShowDialog();
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -204,8 +171,15 @@ namespace ExampleSqlApp
                 int dishTypeId = GetDishTypeId();
                 int difficultyId = GetDifficultyId();
 
+                if (string.IsNullOrWhiteSpace(txtTitle.Text))
+                {
+                    MessageBox.Show("Введите название рецепта!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (isEditMode && recipeId > 0)
                 {
+                    // редактирование
                     string query = $@"
                         UPDATE recipes SET 
                             title = '{txtTitle.Text.Replace("'", "''")}',
@@ -216,10 +190,23 @@ namespace ExampleSqlApp
                         WHERE id = {recipeId}";
 
                     db.ExecuteNonQuery(query);
+
+                    // обновление ингредиентов
+                    db.ExecuteNonQuery($"DELETE FROM recipe_ingredients WHERE recipe_id = {recipeId}");
+                    foreach (string ingName in tempIngredients)
+                    {
+                        DataTable ingId = db.ExecuteQuery($"SELECT id FROM ingredients WHERE name = '{ingName.Replace("'", "''")}'");
+                        if (ingId.Rows.Count > 0)
+                        {
+                            db.ExecuteNonQuery($"INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES ({recipeId}, {ingId.Rows[0]["id"]})");
+                        }
+                    }
+
                     MessageBox.Show("Рецепт обновлён!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
+                    // добавление
                     string query = $@"
                         INSERT INTO recipes (title, description, type_dish_id, difficulty_id, meal_type_id) 
                         VALUES ('{txtTitle.Text.Replace("'", "''")}', 
@@ -229,6 +216,21 @@ namespace ExampleSqlApp
                                 {mealTypeId})";
 
                     db.ExecuteNonQuery(query);
+
+                    // Получаем ID нового рецепта
+                    DataTable result = db.ExecuteQuery("SELECT LAST_INSERT_ID() as id");
+                    int newRecipeId = Convert.ToInt32(result.Rows[0]["id"]);
+
+                    // Добавляем ингредиенты
+                    foreach (string ingName in tempIngredients)
+                    {
+                        DataTable ingId = db.ExecuteQuery($"SELECT id FROM ingredients WHERE name = '{ingName.Replace("'", "''")}'");
+                        if (ingId.Rows.Count > 0)
+                        {
+                            db.ExecuteNonQuery($"INSERT INTO recipe_ingredients (recipe_id, ingredient_id) VALUES ({newRecipeId}, {ingId.Rows[0]["id"]})");
+                        }
+                    }
+
                     MessageBox.Show("Рецепт добавлен!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
@@ -238,6 +240,14 @@ namespace ExampleSqlApp
             catch (Exception ex)
             {
                 MessageBox.Show("Ошибка при сохранении: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void UpdateIngredientsList()
+        {
+            txtIngredientsList.Clear();
+            foreach (string ing in tempIngredients)
+            {
+                txtIngredientsList.AppendText(ing + Environment.NewLine);
             }
         }
         private int GetMealTypeId()
@@ -289,6 +299,7 @@ namespace ExampleSqlApp
             txtTitle.Clear();
             txtDescription.Clear();
             txtIngredientsList.Clear();
+            tempIngredients.Clear();  // Очищаем временный список
             rbMealBreakfast.Checked = false;
             rbMealLunch.Checked = false;
             rbMealDinner.Checked = false;
@@ -329,7 +340,25 @@ namespace ExampleSqlApp
                 else if (difficultyName == "Сложно") rbDifficultyHard.Checked = true;
             }
 
-            LoadIngredientsList();
+            // Загружаем ингредиенты из БД во временный список
+            LoadIngredientsFromDB();
+            UpdateIngredientsList();
+        }
+        private void LoadIngredientsFromDB()
+        {
+            string query = $@"
+        SELECT i.name 
+        FROM recipe_ingredients ri
+        JOIN ingredients i ON ri.ingredient_id = i.id
+        WHERE ri.recipe_id = {recipeId}
+        ORDER BY i.name";
+
+            DataTable ingredients = db.ExecuteQuery(query);
+            tempIngredients.Clear();
+            foreach (DataRow row in ingredients.Rows)
+            {
+                tempIngredients.Add(row["name"].ToString());
+            }
         }
         private string GetMealTypeName(int id)
         {
@@ -373,52 +402,9 @@ namespace ExampleSqlApp
                 txtIngredientsList.AppendText(row["name"].ToString() + Environment.NewLine);
             }
         }
-        private bool SaveRecipeTemporarily()
-        {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(txtTitle.Text))
-                {
-                    MessageBox.Show("Сначала введите название рецепта!",
-                        "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-
-                int mealTypeId = GetMealTypeId();
-                int dishTypeId = GetDishTypeId();
-                int difficultyId = GetDifficultyId();
-
-                string query = $@"
-                    INSERT INTO recipes (title, description, type_dish_id, difficulty_id, meal_type_id) 
-                    VALUES ('{txtTitle.Text.Replace("'", "''")}', 
-                            '{txtDescription.Text.Replace("'", "''")}', 
-                            {dishTypeId}, 
-                            {difficultyId}, 
-                            {mealTypeId})";
-
-                db.ExecuteNonQuery(query);
-
-                DataTable result = db.ExecuteQuery("SELECT LAST_INSERT_ID() as id");
-                if (result.Rows.Count > 0)
-                {
-                    recipeId = Convert.ToInt32(result.Rows[0]["id"]);
-                    isEditMode = true;
-                    this.Text = "Редактирование рецепта (ID: " + recipeId + ")";
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка при сохранении рецепта: " + ex.Message,
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }
