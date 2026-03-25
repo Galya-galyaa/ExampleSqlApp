@@ -269,7 +269,8 @@ namespace ExampleSqlApp
             InitializeComponent();
             recipeId = id;
             isEditMode = true;
-            this.Text = "Редактирование рецепта"; //
+            this.Text = "Редактирование рецепта"; 
+            labelTitle.Text = "Редактирование блюда";
             LoadRecipeData();
             LoadIngredientsComboBox();
         }
@@ -279,6 +280,7 @@ namespace ExampleSqlApp
             recipeId = 0;
             isEditMode = false;
             this.Text = "Добавление рецепта";
+            labelTitle.Text = "Добавление блюда";
             ClearForm();
             LoadIngredientsComboBox();
         }

@@ -37,19 +37,19 @@
             this.txtIngredientsList = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddNewIngredient = new System.Windows.Forms.Button();
             this.gbMealType = new System.Windows.Forms.GroupBox();
-            this.gbDishType = new System.Windows.Forms.GroupBox();
-            this.gbDifficulty = new System.Windows.Forms.GroupBox();
             this.rbMealDinner = new System.Windows.Forms.RadioButton();
             this.rbMealLunch = new System.Windows.Forms.RadioButton();
             this.rbMealBreakfast = new System.Windows.Forms.RadioButton();
+            this.gbDishType = new System.Windows.Forms.GroupBox();
             this.rbTypeThird = new System.Windows.Forms.RadioButton();
             this.rbTypeSecond = new System.Windows.Forms.RadioButton();
             this.rbTypeFirst = new System.Windows.Forms.RadioButton();
+            this.gbDifficulty = new System.Windows.Forms.GroupBox();
             this.rbDifficultyHard = new System.Windows.Forms.RadioButton();
             this.rbDifficultyMedium = new System.Windows.Forms.RadioButton();
             this.rbDifficultyEasy = new System.Windows.Forms.RadioButton();
@@ -139,15 +139,15 @@
             this.txtDescription.Size = new System.Drawing.Size(358, 167);
             this.txtDescription.TabIndex = 8;
             // 
-            // label7
+            // labelTitle
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(87, 32);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(217, 20);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Редактирование блюда:";
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTitle.Location = new System.Drawing.Point(87, 32);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(212, 20);
+            this.labelTitle.TabIndex = 21;
+            this.labelTitle.Text = "Редактирование блюда";
             // 
             // btnSave
             // 
@@ -194,30 +194,6 @@
             this.gbMealType.TabStop = false;
             this.gbMealType.Text = "Тип приема пищи:";
             // 
-            // gbDishType
-            // 
-            this.gbDishType.Controls.Add(this.rbTypeThird);
-            this.gbDishType.Controls.Add(this.rbTypeSecond);
-            this.gbDishType.Controls.Add(this.rbTypeFirst);
-            this.gbDishType.Location = new System.Drawing.Point(256, 513);
-            this.gbDishType.Name = "gbDishType";
-            this.gbDishType.Size = new System.Drawing.Size(149, 123);
-            this.gbDishType.TabIndex = 26;
-            this.gbDishType.TabStop = false;
-            this.gbDishType.Text = "Тип блюда:";
-            // 
-            // gbDifficulty
-            // 
-            this.gbDifficulty.Controls.Add(this.rbDifficultyHard);
-            this.gbDifficulty.Controls.Add(this.rbDifficultyMedium);
-            this.gbDifficulty.Controls.Add(this.rbDifficultyEasy);
-            this.gbDifficulty.Location = new System.Drawing.Point(446, 515);
-            this.gbDifficulty.Name = "gbDifficulty";
-            this.gbDifficulty.Size = new System.Drawing.Size(186, 121);
-            this.gbDifficulty.TabIndex = 27;
-            this.gbDifficulty.TabStop = false;
-            this.gbDifficulty.Text = "Степень сложности:";
-            // 
             // rbMealDinner
             // 
             this.rbMealDinner.AutoSize = true;
@@ -254,6 +230,18 @@
             this.rbMealBreakfast.Text = "Завтрак";
             this.rbMealBreakfast.UseVisualStyleBackColor = true;
             // 
+            // gbDishType
+            // 
+            this.gbDishType.Controls.Add(this.rbTypeThird);
+            this.gbDishType.Controls.Add(this.rbTypeSecond);
+            this.gbDishType.Controls.Add(this.rbTypeFirst);
+            this.gbDishType.Location = new System.Drawing.Point(256, 513);
+            this.gbDishType.Name = "gbDishType";
+            this.gbDishType.Size = new System.Drawing.Size(149, 123);
+            this.gbDishType.TabIndex = 26;
+            this.gbDishType.TabStop = false;
+            this.gbDishType.Text = "Тип блюда:";
+            // 
             // rbTypeThird
             // 
             this.rbTypeThird.AutoSize = true;
@@ -289,6 +277,18 @@
             this.rbTypeFirst.TabStop = true;
             this.rbTypeFirst.Text = "Первое";
             this.rbTypeFirst.UseVisualStyleBackColor = true;
+            // 
+            // gbDifficulty
+            // 
+            this.gbDifficulty.Controls.Add(this.rbDifficultyHard);
+            this.gbDifficulty.Controls.Add(this.rbDifficultyMedium);
+            this.gbDifficulty.Controls.Add(this.rbDifficultyEasy);
+            this.gbDifficulty.Location = new System.Drawing.Point(446, 515);
+            this.gbDifficulty.Name = "gbDifficulty";
+            this.gbDifficulty.Size = new System.Drawing.Size(186, 121);
+            this.gbDifficulty.TabIndex = 27;
+            this.gbDifficulty.TabStop = false;
+            this.gbDifficulty.Text = "Степень сложности:";
             // 
             // rbDifficultyHard
             // 
@@ -337,7 +337,7 @@
             this.Controls.Add(this.btnAddNewIngredient);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtIngredientsList);
@@ -371,7 +371,7 @@
         private System.Windows.Forms.TextBox txtIngredientsList;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDescription;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAddNewIngredient;
