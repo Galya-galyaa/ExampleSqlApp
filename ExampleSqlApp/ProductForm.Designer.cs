@@ -118,12 +118,13 @@
             // comboBoxChoice
             // 
             this.comboBoxChoice.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.comboBoxChoice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxChoice.FormattingEnabled = true;
             this.comboBoxChoice.Location = new System.Drawing.Point(242, 232);
             this.comboBoxChoice.Name = "comboBoxChoice";
             this.comboBoxChoice.Size = new System.Drawing.Size(210, 28);
             this.comboBoxChoice.TabIndex = 5;
-            this.comboBoxChoice.Text = "Фильтр по категориям";
+            this.comboBoxChoice.SelectedIndexChanged += new System.EventHandler(this.comboBoxChoice_SelectedIndexChanged);
             // 
             // ProductForm
             // 

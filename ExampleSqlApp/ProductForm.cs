@@ -29,6 +29,19 @@ namespace ExampleSqlApp
             dataGridViewRecipes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewRecipes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
 
+            comboBoxChoice.Items.Clear();
+            comboBoxChoice.Items.Add("Все рецепты");
+            comboBoxChoice.Items.Add("Первое");
+            comboBoxChoice.Items.Add("Второе");
+            comboBoxChoice.Items.Add("Третье");
+            comboBoxChoice.Items.Add("Завтрак");
+            comboBoxChoice.Items.Add("Обед");
+            comboBoxChoice.Items.Add("Ужин");
+            comboBoxChoice.Items.Add("Легко");
+            comboBoxChoice.Items.Add("Средне");
+            comboBoxChoice.Items.Add("Сложно");
+            comboBoxChoice.SelectedIndex = 0;
+
             CreateColumns();
             LoadRecipes();
         }
@@ -133,18 +146,53 @@ namespace ExampleSqlApp
                 JOIN meal_types mt ON r.meal_type_id = mt.id
                 LEFT JOIN recipe_ingredients ri ON r.id = ri.recipe_id
                 LEFT JOIN ingredients i ON ri.ingredient_id = i.id";
+
+            string filter = comboBoxChoice.SelectedItem?.ToString();
+            bool hasWhere = false;
+            if (!string.IsNullOrWhiteSpace(filter) && filter != "Все рецепты")
+            {
+                switch (filter)
+                {
+                    case "Первое":
+                    case "Второе":
+                    case "Третье":
+                        query += $" WHERE td.name = '{filter}'";
+                        hasWhere = true;
+                        break;
+                    case "Завтрак":
+                    case "Обед":
+                    case "Ужин":
+                        query += $" WHERE mt.name = '{filter}'";
+                        hasWhere = true;
+                        break;
+                    case "Легко":
+                    case "Средне":
+                    case "Сложно":
+                        query += $" WHERE tdf.name = '{filter}'";
+                        hasWhere = true;
+                        break;
+                }
+            }
+
             string searchText = textBoxSearch.Text.Trim();
             if (!string.IsNullOrWhiteSpace(searchText) && searchText != "Поиск")
             {
                 string search = searchText.Replace("'", "''");
-                query += $" WHERE r.title LIKE '{search}%'";
+                if (hasWhere)
+                    query += $" AND r.title LIKE '{search}%'";
+                else
+                    query += $" WHERE r.title LIKE '{search}%'";
             }
             query += " GROUP BY r.id ORDER BY r.id";
+
             DB db = new DB();
             DataTable table = db.ExecuteQuery(query);
             dataGridViewRecipes.DataSource = table;
-
-            dataGridViewRecipes.Columns["Ingredients"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+       
+            if (dataGridViewRecipes.Columns.Contains("Ingredients"))
+            {
+                dataGridViewRecipes.Columns["Ingredients"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            }
             dataGridViewRecipes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
@@ -226,8 +274,13 @@ namespace ExampleSqlApp
                 textBoxSearch.ForeColor = Color.Gray;
             }
         }
-        /// s
+        
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            LoadRecipes();
+        }
+
+        private void comboBoxChoice_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadRecipes();
         }
