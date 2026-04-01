@@ -226,8 +226,7 @@ namespace ExampleSqlApp
                 textBoxSearch.ForeColor = Color.Gray;
             }
         }
-        
-
+        //// 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
             LoadRecipes();
