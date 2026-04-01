@@ -348,6 +348,7 @@
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.label1);
             this.Name = "EditForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditForm";
             this.gbMealType.ResumeLayout(false);
             this.gbMealType.PerformLayout();

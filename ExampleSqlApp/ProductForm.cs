@@ -16,6 +16,10 @@ namespace ExampleSqlApp
         public ProductForm()
         {
             InitializeComponent();
+
+            textBoxSearch.Text = "Поиск";
+            textBoxSearch.ForeColor = Color.Gray;
+
             dataGridViewRecipes.AutoGenerateColumns = false;
             dataGridViewRecipes.RowTemplate.Height = 40;
             dataGridViewRecipes.AllowUserToAddRows = false;
@@ -128,10 +132,14 @@ namespace ExampleSqlApp
                 JOIN type_difficults tdf ON r.difficulty_id = tdf.id
                 JOIN meal_types mt ON r.meal_type_id = mt.id
                 LEFT JOIN recipe_ingredients ri ON r.id = ri.recipe_id
-                LEFT JOIN ingredients i ON ri.ingredient_id = i.id
-                GROUP BY r.id
-                ORDER BY r.id";
-
+                LEFT JOIN ingredients i ON ri.ingredient_id = i.id";
+            string searchText = textBoxSearch.Text.Trim();
+            if (!string.IsNullOrWhiteSpace(searchText) && searchText != "Поиск")
+            {
+                string search = searchText.Replace("'", "''");
+                query += $" WHERE r.title LIKE '{search}%'";
+            }
+            query += " GROUP BY r.id ORDER BY r.id";
             DB db = new DB();
             DataTable table = db.ExecuteQuery(query);
             dataGridViewRecipes.DataSource = table;
@@ -198,6 +206,30 @@ namespace ExampleSqlApp
         {
             EditForm addForm = new EditForm();
             addForm.ShowDialog();
+            LoadRecipes();
+        }
+
+        private void textBoxSearch_Enter(object sender, EventArgs e)
+        {
+            if (textBoxSearch.Text == "Поиск")
+            {
+                textBoxSearch.Text = "";
+                textBoxSearch.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBoxSearch_Leave(object sender, EventArgs e)
+        {
+            if (textBoxSearch.Text == "")
+            {
+                textBoxSearch.Text = "Поиск";
+                textBoxSearch.ForeColor = Color.Gray;
+            }
+        }
+        
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
             LoadRecipes();
         }
     }
