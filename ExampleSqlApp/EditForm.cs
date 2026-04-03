@@ -331,7 +331,7 @@ namespace ExampleSqlApp
                 string dishTypeName = GetDishTypeName(dishTypeId);
                 if (dishTypeName == "Супы" || dishTypeName == "Первое") rbTypeFirst.Checked = true;
                 else if (dishTypeName == "Вторые блюда" || dishTypeName == "Второе") rbTypeSecond.Checked = true;
-                else if (dishTypeName == "Десерты" || dishTypeName == "Третье") rbTypeThird.Checked = true;
+                else if (dishTypeName == "Десерт") rbTypeThird.Checked = true;
 
                 int difficultyId = Convert.ToInt32(row["difficulty_id"]);
                 string difficultyName = GetDifficultyName(difficultyId);

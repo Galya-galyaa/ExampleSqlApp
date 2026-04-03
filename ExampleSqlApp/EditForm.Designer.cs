@@ -189,7 +189,7 @@
             this.gbMealType.Controls.Add(this.rbMealBreakfast);
             this.gbMealType.Location = new System.Drawing.Point(74, 515);
             this.gbMealType.Name = "gbMealType";
-            this.gbMealType.Size = new System.Drawing.Size(176, 112);
+            this.gbMealType.Size = new System.Drawing.Size(176, 121);
             this.gbMealType.TabIndex = 25;
             this.gbMealType.TabStop = false;
             this.gbMealType.Text = "Тип приема пищи:";
@@ -248,10 +248,10 @@
             this.rbTypeThird.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rbTypeThird.Location = new System.Drawing.Point(23, 87);
             this.rbTypeThird.Name = "rbTypeThird";
-            this.rbTypeThird.Size = new System.Drawing.Size(88, 24);
+            this.rbTypeThird.Size = new System.Drawing.Size(90, 24);
             this.rbTypeThird.TabIndex = 19;
             this.rbTypeThird.TabStop = true;
-            this.rbTypeThird.Text = "Третье";
+            this.rbTypeThird.Text = "Десерт";
             this.rbTypeThird.UseVisualStyleBackColor = true;
             // 
             // rbTypeSecond

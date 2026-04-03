@@ -33,7 +33,7 @@ namespace ExampleSqlApp
             comboBoxChoice.Items.Add("Все рецепты");
             comboBoxChoice.Items.Add("Первое");
             comboBoxChoice.Items.Add("Второе");
-            comboBoxChoice.Items.Add("Третье");
+            comboBoxChoice.Items.Add("Десерт");
             comboBoxChoice.Items.Add("Завтрак");
             comboBoxChoice.Items.Add("Обед");
             comboBoxChoice.Items.Add("Ужин");
@@ -155,7 +155,7 @@ namespace ExampleSqlApp
                 {
                     case "Первое":
                     case "Второе":
-                    case "Третье":
+                    case "Десерт":
                         query += $" WHERE td.name = '{filter}'";
                         hasWhere = true;
                         break;
