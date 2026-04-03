@@ -181,7 +181,7 @@ namespace ExampleSqlApp
                 if (hasWhere)
                     query += $" AND r.title LIKE '{search}%'";
                 else
-                    query += $" WHERE r.title LIKE '{search}%'";
+                    query += $" WHERE r.title LIKE '%{search}%'";
             }
             query += " GROUP BY r.id ORDER BY r.id";
 
