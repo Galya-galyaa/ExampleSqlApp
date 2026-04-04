@@ -79,7 +79,7 @@ namespace ExampleSqlApp
             ingCol.Name = "Ingredients";
             ingCol.HeaderText = "Ингредиенты";
             ingCol.DataPropertyName = "Ingredients";
-            ingCol.Width = 100;
+            ingCol.Width = 120;
             dataGridViewRecipes.Columns.Add(ingCol);
 
             // тип блюда
@@ -136,7 +136,7 @@ namespace ExampleSqlApp
                     r.id AS Id,
                     r.title AS Title,
                     r.description AS Description,
-                    GROUP_CONCAT(i.name ORDER BY i.name SEPARATOR '\n') AS Ingredients,
+                    GROUP_CONCAT(i.name ORDER BY i.name SEPARATOR ', ') AS Ingredients,
                     td.name AS TypeDish,
                     tdf.name AS Difficulty,
                     mt.name AS MealType
